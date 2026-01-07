@@ -4,9 +4,10 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Main } from './pages/main/main'
 import { Login } from './pages/login/login'
+import { authenticateLoader } from './loaders/authenticate'
 
 const router = createBrowserRouter([
-  {path: "/", index: true, element: <Main />},
+  {path: "/", index: true, loader: authenticateLoader, element: <Main />},
   {path: "/login", index: true, element: <Login />}
 ])
 

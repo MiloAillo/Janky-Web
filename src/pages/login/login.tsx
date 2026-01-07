@@ -1,6 +1,6 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useRef, useState, type JSX } from "react";
 import { AlertCircleIcon } from "lucide-react"
@@ -58,6 +58,8 @@ export const Login = (): JSX.Element => {
                         <Button onClick={login} className="w-full bg-neutral-800 font-semibold">Login</Button>
                     </CardFooter>
                 </Card>
+
+                <p className="self-center text-white/20">&copy; 2026 DreamChaser.co | All Right Reserved.</p>
             </div>
         </section>
     )

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useEffect, useState, type JSX } from "react";
 import { useLoaderData } from "react-router-dom";
 
@@ -25,9 +25,9 @@ export const Main = (): JSX.Element => {
     }
 
     return (
-        <section className="min-h-screen w-screen bg-neutral-800 flex flex-col items-center gap-3">
+        <section className="bg-neutral-800 flex flex-col items-center gap-3">
             {/* Navbar */}
-            <div className="w-screen  max-w-225 h-15 flex flex-row justify-between items-center px-7 mx-2 mt-2 bg-white/10 border border-white/20 shadow rounded-xl">
+            <div className="w-screen fixed max-w-225 h-15 flex flex-row justify-between items-center px-7 mx-2 mt-2 bg-white/10 border border-white/20 shadow rounded-xl backdrop-blur-[15px]">
                 <p className="font-semibold text-2xl text-white/80">Notes</p>
                 <div className="flex gap-5 items-center">
                     <Button onClick={() => logout()} className="bg-black/15 backdrop-blur-2xl tracking-wide text-white/80">
@@ -36,22 +36,25 @@ export const Main = (): JSX.Element => {
                 </div>
             </div>
 
-            <div className="w-screen max-w-225 h-15 flex flex-col sm:flex-row mx-2 gap-5">
-                <div className="w-full flex flex-col gap-3 px-5 py-5 flex-2 h-fit bg-white/10 border border-white/20 shadow rounded-xl">
+            <div className="w-screen max-w-225 h-15 flex flex-col sm:flex-row mx-2 gap-5 mt-20">
+                <div className="w-full flex flex-col gap-3 px-5 py-5 flex-2 h-fit [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-white/10 border border-white/20 shadow rounded-xl">
                     {notes && (
                         notes.map((note: {tittle: string, content: string}) => (
                     <Dialog>
                         <DialogTrigger className="w-full">
                             <div className="w-full bg-black/20 rounded-xl px-4 py-4 flex flex-col gap-2 h-fit text-left">
                                 <p className="text-xl font-semibold text-white/80">{note.tittle}</p>
-                                <p className="text-white/75">{note.content}</p>
+                                <p className="text-white/75">{note.content.split("").map((letter, index) => {
+                                    if (index < 75) return letter
+                                    if (index === 75) return "..."
+                                })}</p>
                             </div>
                         </DialogTrigger>
                         <DialogContent className="bg-white/10 backdrop-blur-[10px] border-0">
                            <div className="flex items-center gap-3">
                                 <div className="w-full flex flex-col gap-2 h-fit text-left">
                                     <p className="text-xl font-semibold text-white/80">{note.tittle}</p>
-                                    <p className="text-white/75">{note.content}</p>
+                                    <p className="text-white/75 whitespace-pre-line">{note.content}</p>
                                 </div>
                             </div>
                         </DialogContent>
